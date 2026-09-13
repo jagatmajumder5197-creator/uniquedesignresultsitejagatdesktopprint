@@ -6,15 +6,15 @@ let allStudents = [];
 const subjects = [
   { name: 'BENGALI', fm: 'FMB', written: 'WTB', oral: 'OLB' },
   { name: 'ENGLISH', fm: 'FME', written: 'WTE', oral: 'OLE' },
-  { name: 'MATHS', fm: 'FMM', written: 'WTM', oral: 'OLM' },
+  { name: 'MATHEMATICS', fm: 'FMM', written: 'WTM', oral: 'OLM' },
   { name: 'HINDI', fm: 'FMHN', written: 'WTHN', oral: 'OLHN' },
   { name: 'COMPUTER', fm: 'FMCM', written: 'WTCM', oral: 'OLCM' },
   { name: 'GK', fm: 'FMGK', written: 'WTGK', oral: 'OLGK' },
   { name: 'EVS', fm: 'FMEV', written: 'WTEV', oral: 'OLEV' },
   { name: 'LSC', fm: 'FMLSC', written: 'WTLSC', oral: 'OLLSC' },
   { name: 'PSC', fm: 'FMPSC', written: 'WTPSC', oral: 'OLPSC' },
-  { name: 'Beng Rhym', fm: 'FMRYMB', written: 'WTRYMB', oral: 'OLRYMB' },
-  { name: 'Eng Rhym', fm: 'FMRYME', written: 'WTRYME', oral: 'OLRYME' },
+  { name: 'BENG RHYM', fm: 'FMRYMB', written: 'WTRYMB', oral: 'OLRYMB' },
+  { name: 'ENG RHYM', fm: 'FMRYME', written: 'WTRYME', oral: 'OLRYME' },
   { name: 'HISTORY', fm: 'FMHS', written: 'WTHS', oral: 'OLHS' },
   { name: 'GEOGRAPHY', fm: 'FMG', written: 'WTG', oral: 'OLG' }
 ];
