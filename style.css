@@ -168,7 +168,7 @@ body {
 .top-header {
   margin-bottom: 16px;
   padding-bottom: 10px;
-  border-bottom: 1.5px solid rgba(158, 137, 82, 0.2);
+  border-bottom: 5px solid # 33ffff;
 }
 
 .header-logo-row {
@@ -192,10 +192,10 @@ body {
 }
 
 .header-center h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Algerian', serif;
   font-size: 26px;
   font-weight: 700;
-  color: var(--maroon);
+  color: #0d47a1;
   letter-spacing: 0.5px;
   line-height: 1.15;
   text-transform: uppercase;
@@ -203,24 +203,25 @@ body {
 }
 
 .header-center h2 {
-  font-size: 12px;
+  font-family: 'Agency FB', serif;
+  font-size: 15px;
   color: var(--text-dark);
-  font-weight: 500;
+  font-weight: 700;
   margin: 3px 0;
 }
 
 .header-center h2::before,
 .header-center h2::after {
-  content: " ❦ ";
+  content: " ** ";
   color: var(--gold-text);
   font-size: 11px;
 }
 
 .header-center h3 {
   display: inline-block;
-  background: linear-gradient(180deg, #d8a84e 0%, #b88628 100%);
-  color: #000000;
-  font-size: 11px;
+  background: #1e40af;
+  color: #ffffff;
+  font-size: 14px;
   font-weight: 600;
   padding: 4px 24px;
   letter-spacing: 1px;
