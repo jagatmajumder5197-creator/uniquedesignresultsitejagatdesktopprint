@@ -408,12 +408,12 @@ body {
 .verified-note {
   margin: 12px 0;
   padding: 5px 10px;
-  background: var(--mint-bg);
-  border: 1px solid var(--table-border);
+  border: none;
   border-radius: 2px;
   text-align: center;
-  color: var(--text-dark);
-  font-weight: 600;
+  color: #15803d;
+  background: transparent;
+  font-weight: 500;
   font-size: 10px;
 }
 
@@ -423,7 +423,7 @@ body {
   align-items: flex-end;
   margin-top: 20px;
   padding: 0 5px;
-  gap: 10px;
+  gap: 11px;
 }
 
 .sign-col {
