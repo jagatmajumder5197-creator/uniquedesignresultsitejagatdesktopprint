@@ -311,16 +311,16 @@ body {
 .assessment-title {
   margin: 16px 0 8px 0;
   text-align: center;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Algerian', serif;
   font-size: 17px;
   font-weight: 700;
-  color: var(--text-dark);
+  color: #00cccc;
   letter-spacing: 0.4px;
 }
 
 .assessment-title::before,
 .assessment-title::after {
-  content: " 〜 ";
+  content: " ";
   color: var(--gold-text);
   font-size: 15px;
 }
