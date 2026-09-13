@@ -20,19 +20,10 @@ const subjects = [
 ];
 
 const CLASS_ORDER = [
-  'NUR_A', 'NUR_B',
-  'LKG_A', 'LKG_B',
-  'UKG_A', 'UKG_B',
-  'I (A)', 'I (B)',
-  'II (Two)',
-  'III (Three)',
-  'IV (Four)',
-  'V (Five)',
-  'VI (Six)',
-  'VII (Seven)',
-  'VIII (Eight)',
-  'IX (Nine)',
-  'X (Ten)'
+  'NUR_A', 'NUR_B', 'LKG_A', 'LKG_B', 'UKG_A', 'UKG_B',
+  'I (A)', 'I (B)', 'II (Two)', 'III (Three)', 'IV (Four)',
+  'V (Five)', 'VI (Six)', 'VII (Seven)', 'VIII (Eight)',
+  'IX (Nine)', 'X (Ten)'
 ];
 
 function classSortIndex(cls) {
@@ -73,7 +64,7 @@ window.onload = async () => {
     console.error('API Error:', err);
     loaderWrap.classList.add('hidden');
     errorBox.classList.remove('hidden');
-    errorBox.innerHTML = '<div style="padding:12px;">Failed to Load Result Data.<br>Please Try Again Later.</div>';
+    errorBox.innerHTML = '<div>Failed to Load Result Data. Please Try Again Later.</div>';
   }
 };
 
@@ -82,7 +73,6 @@ function loadClassDropdown() {
   classSelect.innerHTML = '<option value="">SELECT CLASS</option>';
 
   const classes = [...new Set(allStudents.map(s => s.CLASS).filter(Boolean))];
-
   classes.sort((a, b) => {
     const diff = classSortIndex(a) - classSortIndex(b);
     return diff !== 0 ? diff : String(a).localeCompare(String(b));
@@ -100,22 +90,14 @@ document.getElementById('classSelect').addEventListener('change', function () {
   const cls = this.value;
 
   const signatureMap = {
-    "NUR_A": "nura.png",
-    "NUR_B": "nurb.png",
-    "LKG_A": "lkga.png",
-    "LKG_B": "lkgb.png",
-    "UKG_A": "ukga.png",
-    "UKG_B": "ukgb.png",
-    "I (A)": "ia.png",
-    "I (B)": "ib.png",
-    "II (Two)": "iia.png",
-    "III (Three)": "iiia.png",
-    "IV (Four)": "iva.png",
-    "V (Five)": "va.png",
-    "VI (Six)": "via.png",
-    "VII (Seven)": "viia.png",
-    "VIII (Eight)": "viiia.png",
-    "IX (Nine)": "jagatinfras.png",
+    "NUR_A": "nura.png", "NUR_B": "nurb.png",
+    "LKG_A": "lkga.png", "LKG_B": "lkgb.png",
+    "UKG_A": "ukga.png", "UKG_B": "ukgb.png",
+    "I (A)": "ia.png", "I (B)": "ib.png",
+    "II (Two)": "iia.png", "III (Three)": "iiia.png",
+    "IV (Four)": "iva.png", "V (Five)": "va.png",
+    "VI (Six)": "via.png", "VII (Seven)": "viia.png",
+    "VIII (Eight)": "viiia.png", "IX (Nine)": "jagatinfras.png",
     "X (Ten)": "jagatinfras.png"
   };
 
@@ -130,12 +112,11 @@ document.getElementById('classSelect').addEventListener('change', function () {
   }
 
   const studentSelect = document.getElementById('studentSelect');
-  studentSelect.innerHTML = '<option value="">STUDENTS NAME</option>';
+  studentSelect.innerHTML = '<option value="">SELECT STUDENT</option>';
 
   if (!cls) return;
 
   const students = allStudents.filter(s => String(s.CLASS) === String(cls));
-
   students.sort((a, b) => safeNum(a.ROLL) - safeNum(b.ROLL));
 
   students.forEach(student => {
@@ -150,14 +131,12 @@ document.getElementById('viewResultBtn').addEventListener('click', showResult);
 
 function showResult() {
   const id = document.getElementById('studentSelect').value;
-
   if (!id) {
     alert('Please select a student.');
     return;
   }
 
   const student = allStudents.find(s => String(s.I_D) === String(id));
-
   if (!student) {
     alert('No result found.');
     return;
@@ -181,11 +160,10 @@ function getGrade(percent) {
 function getFmBreakdown(fm, writtenVal, studentClass, subject) {
   if (fm === 100) return { written: 90, oral: 10 };
   if (fm === 25) return { written: '', oral: 25 };
-  
-  if (fm === 50) {
 
+  if (fm === 50) {
     const gkClasses = ['NUR_A', 'NUR_B', 'LKG_A', 'LKG_B'];
-    const isGk = (subject === 'GK' || subject === 'GK');
+    const isGk = (subject === 'GK');
 
     if (gkClasses.includes(studentClass) && isGk) {
       return { written: '', oral: 50 };
@@ -197,7 +175,7 @@ function getFmBreakdown(fm, writtenVal, studentClass, subject) {
     if (hindiClasses.includes(studentClass) && isHindi) {
       return { written: 40, oral: 10 };
     }
-    
+
     return { written: 45, oral: 5 };
   }
 
@@ -242,6 +220,8 @@ function renderResult(student) {
 
   let grandFullMarks = 0;
   let grandObtained = 0;
+  let hasFailed = false;
+  let rowsHtml = '';
 
   subjects.forEach(sub => {
     const fm = safeNum(student[sub.fm]);
@@ -250,39 +230,49 @@ function renderResult(student) {
     const obtainedWritten = safeNum(student[sub.written]);
     const obtainedOral = safeNum(student[sub.oral]);
     const total = obtainedWritten + obtainedOral;
-    const percentage = (total / fm) * 100;
+    const percentage = fm > 0 ? (total / fm) * 100 : 0;
     const grade = getGrade(percentage);
+
+    if (grade === 'D') {
+      hasFailed = true;
+    }
 
     grandFullMarks += fm;
     grandObtained += total;
 
     const fmStructure = getFmBreakdown(fm, student[sub.written], student.CLASS, sub.name);
 
-    const row = `
+    rowsHtml += `
       <tr>
-        <td>${sub.name}</td>
+        <td><b>${sub.name}</b></td>
         <td>${fmStructure.written}</td>
         <td>${fmStructure.oral}</td>
-        <td>${fm}</td>
-        <td class="spacer-col"></td>
+        <td><b>${fm}</b></td>
         <td>${obtainedWritten}</td>
         <td>${obtainedOral}</td>
-        <td>${total}</td>
+        <td><b>${total}</b></td>
         <td>${percentage.toFixed(2)}%</td>
-        <td>${grade}</td>
+        <td><b>${grade}</b></td>
       </tr>
     `;
-
-    tbody.innerHTML += row;
   });
+
+  tbody.innerHTML = rowsHtml;
 
   const grandPercentage = grandFullMarks > 0 ? (grandObtained / grandFullMarks) * 100 : 0;
   const grandGrade = getGrade(grandPercentage);
   const calculatedRank = calculateRank(student.CLASS, student.I_D);
 
+  const artVal = student.ART || student.Art || 'A<sup>+</sup>';
+  document.getElementById('artGrade').innerHTML = artVal;
+
   document.getElementById('grandFullMarks').innerText = grandFullMarks;
   document.getElementById('grandTotal').innerText = grandObtained;
   document.getElementById('grandPercentage').innerText = grandPercentage.toFixed(2) + '%';
+
+  const resultElem = document.getElementById('grandResult');
+  resultElem.innerText = hasFailed ? 'Fail' : 'Pass';
+
   document.getElementById('grandGrade').innerText = grandGrade;
   document.getElementById('grandRank').innerHTML = formatOrdinal(calculatedRank);
 }
