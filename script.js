@@ -70,7 +70,7 @@ window.onload = async () => {
 
 function loadClassDropdown() {
   const classSelect = document.getElementById('classSelect');
-  classSelect.innerHTML = '<option value="">SELECT CLASS</option>';
+  classSelect.innerHTML = '<option value="">CLASS_SEC</option>';
 
   const classes = [...new Set(allStudents.map(s => s.CLASS).filter(Boolean))];
   classes.sort((a, b) => {
@@ -112,7 +112,7 @@ document.getElementById('classSelect').addEventListener('change', function () {
   }
 
   const studentSelect = document.getElementById('studentSelect');
-  studentSelect.innerHTML = '<option value="">SELECT STUDENT</option>';
+  studentSelect.innerHTML = '<option value="">STUDENTS_NAME</option>';
 
   if (!cls) return;
 
