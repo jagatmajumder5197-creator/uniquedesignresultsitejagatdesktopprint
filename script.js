@@ -248,6 +248,7 @@ function renderResult(student) {
         <td>${fmStructure.written}</td>
         <td>${fmStructure.oral}</td>
         <td><b>${fm}</b></td>
+        <td class="spacer-col"></td>
         <td>${obtainedWritten}</td>
         <td>${obtainedOral}</td>
         <td><b>${total}</b></td>
