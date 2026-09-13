@@ -185,16 +185,16 @@ function getFmBreakdown(fm, writtenVal, studentClass, subject) {
   if (fm === 50) {
 
     const gkClasses = ['NUR_A', 'NUR_B', 'LKG_A', 'LKG_B'];
-    const isGk = (sub === 'GK' || sub === 'GK');
+    const isGk = (subject === 'GK' || subject === 'GK');
 
-    if (gkClasses.includes(cls) && isGk) {
+    if (gkClasses.includes(studentClass) && isGk) {
       return { written: '', oral: 50 };
     }
 
     const hindiClasses = ['UKG_A', 'UKG_B', 'I (A)', 'I (B)'];
-    const isHindi = (sub === 'HN' || sub === 'HINDI');
+    const isHindi = (subject === 'HN' || subject === 'HINDI');
 
-    if (hindiClasses.includes(cls) && isHindi) {
+    if (hindiClasses.includes(studentClass) && isHindi) {
       return { written: 40, oral: 10 };
     }
     
