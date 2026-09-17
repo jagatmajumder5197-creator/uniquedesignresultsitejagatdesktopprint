@@ -1,0 +1,689 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+:root {
+  --gold-text: #816d3b;
+  --gold-border: #9e8952;
+  --mint-bg: #dcece5;
+  --mint-light: #e8f3ed;
+  --table-border: #a2bca8;
+  --text-dark: #122117;
+  --text-black: #000000;
+  --royal-blue: #0066ff;
+}
+
+html {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 20px 12px;
+  background: #f4f6f8;
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ===== POP-IN ANIMATION ===== */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-pop {
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* ===== PORTAL CONTAINER (DESKTOP OPTIMIZED) ===== */
+.portal-container {
+  width: 100%;
+  max-width: 186mm;
+  margin: 0 auto 8mm;
+  text-align: center;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.portal-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.portal-container h1 {
+  font-family: 'Algerian', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0066ff;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.portal-container h2 {
+  font-size: 13px;
+  color: var(--text-dark);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.portal-container h3 {
+  font-size: 15px;
+  letter-spacing: -0.5px;
+  color: #7e22ce;
+  margin-top: 2px;
+  margin-bottom: 12px;
+}
+
+.portal-container select,
+.portal-container button {
+  width: 100%;
+  height: 44px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1.5px solid #cc00ff;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: #cc00ff;
+  padding: 0 12px;
+  cursor: pointer;
+  background-color: #f9f0ff;
+}
+
+.portal-container button {
+  border: none;
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+  color: #ffffff;
+  transition: transform 0.1s ease;
+}
+
+.portal-container button:hover {
+  transform: translateY(-1px);
+}
+
+.loader-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e0e0e0;
+  border-top-color: var(--royal-blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-box {
+  background: #fde8e8;
+  color: #9b1c1c;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ===== RESULT WRAPPER (A4 / DESKTOP OPTIMIZED) ===== */
+.result-wrapper {
+  width: 186mm;
+  min-height: 277mm;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.marksheet {
+  position: relative;
+  width: 186mm;
+  min-height: 277mm;
+  margin: 0 auto;
+  padding: 10mm 8mm;
+  background-color: #ffffff;
+  background-image: url('Images/bg.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  color: var(--text-black);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  line-height: 1.25;
+  border-radius: 2px;
+  border: 1px solid #f0f0f0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* HEADER SECTION */
+.top-header {
+  margin-bottom: 6mm;
+  padding-bottom: 4mm;
+  border-bottom: 2.5pt solid #33ffff;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.header-logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4mm;
+}
+
+.marksheet-logo {
+  width: 16mm;
+  height: 16mm;
+  object-fit: contain;
+}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+}
+
+.header-center h1 {
+  font-family: 'Algerian', serif;
+  font-size: 18pt;
+  font-weight: 700;
+  color: #990066;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  white-space: normal;
+  margin: 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.header-center h2 {
+  font-size: 11pt;
+  color: #5b21b6;
+  font-weight: 700;
+  margin: 1.5mm 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.header-center h3 {
+  display: inline-block;
+  background: #0066cc;
+  color: #ffffff;
+  font-size: 9.5pt;
+  font-weight: 600;
+  padding: 2mm 6mm;
+  border-radius: 1.5mm;
+  margin: 1mm 0 0 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* STUDENT & GRADING TABLE ROW */
+.top-info-row {
+  display: flex;
+  gap: 4mm;
+  margin: 5mm 0;
+  align-items: stretch;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.student-section {
+  flex: 3;
+  min-width: 0;
+}
+
+.student-table,
+.grading-table,
+.result-table,
+.final-summary table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.student-table {
+  height: 100%;
+}
+
+.student-table td {
+  border: 0.75pt solid var(--table-border);
+  font-size: 10pt;
+  font-weight: 600;
+  color: #000000;
+  background: #ffffff;
+  padding: 2.5mm 3mm;
+  vertical-align: middle;
+  white-space: nowrap;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.student-table td.label-cell {
+  width: 32%;
+  background: var(--mint-bg);
+  color: #000000;
+  font-weight: 700;
+  font-size: 9pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.student-table td:nth-child(2) {
+  color: #0066ff !important;
+  font-weight: 700;
+  font-size: 10pt;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* GRADING TABLE */
+.grading-section {
+  width: 26mm;
+  max-width: 26mm;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.grading-title {
+  text-align: center;
+  font-size: 6.5pt;
+  font-weight: 700;
+  color: var(--text-dark);
+  background: var(--mint-bg);
+  border: 0.75pt solid var(--table-border);
+  border-bottom: none;
+  padding: 1mm 0.5mm;
+  text-transform: uppercase;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.grading-table {
+  height: 100%;
+}
+
+.grading-table th,
+.grading-table td {
+  border: 0.75pt solid var(--table-border);
+  padding: 0.5mm;
+  font-size: 7.5pt;
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-black);
+  background: #ffffff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.grading-table th {
+  background: var(--mint-bg);
+  color: var(--text-dark);
+  font-weight: 700;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.assessment-title {
+  margin: 5mm 0 3mm 0;
+  text-align: center;
+  font-family: 'Agency FB', sans-serif, serif;
+  font-size: 13pt;
+  font-weight: 700;
+  color: #ff0066;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* RESULT TABLE */
+.table-responsive {
+  width: 100%;
+  margin: 4mm 0;
+  display: block;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.result-table {
+  table-layout: fixed;
+}
+
+.result-table th,
+.result-table td {
+  border: 0.75pt solid var(--table-border);
+  padding: 2.5mm 1.5mm;
+  text-align: center;
+  font-size: 9pt;
+  font-weight: 400;
+  color: var(--text-black);
+  background: #ffffff;
+  line-height: 1.15;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.result-table th {
+  background: var(--mint-bg);
+  color: #000000;
+  font-weight: 700;
+  font-size: 9.5pt;
+  padding: 2.5mm 1mm;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.result-table td:first-child {
+  text-align: left;
+  padding-left: 2.5mm;
+  font-weight: 700;
+  color: #000000;
+  background: #fafafa;
+  white-space: nowrap;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.result-table td.obt-marks,
+.result-table td:nth-child(6),
+.result-table td:nth-child(7),
+.result-table td:nth-child(8),
+.result-table td:nth-child(9),
+.result-table td:nth-child(10) {
+  color: #0066ff !important;
+  font-weight: 700;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.result-table th.spacer-col,
+.result-table td.spacer-col {
+  width: 2mm;
+  min-width: 2mm;
+  max-width: 2mm;
+  padding: 0 !important;
+  border-left: 1.5pt solid var(--gold-border);
+  border-right: 0.5pt solid #e8e8e8;
+  background: #f5f5f5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* FINAL SUMMARY TABLE */
+.final-summary {
+  margin: 5mm 0;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.final-summary th {
+  background: var(--mint-bg);
+  color: #000000;
+  font-weight: 800;
+  font-size: 9.5pt;
+  padding: 3mm 2mm;
+  border: 0.75pt solid var(--table-border);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.final-summary td {
+  background: #ffffff;
+  color: #0066ff;
+  font-weight: 700;
+  font-size: 9.5pt;
+  padding: 3mm 2mm;
+  border: 0.75pt solid var(--table-border);
+  text-align: center;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.verified-note {
+  margin: 4mm 0;
+  padding: 2mm;
+  text-align: center;
+  color: #15803d;
+  font-weight: 600;
+  font-size: 8.5pt;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* SIGNATURE AREA */
+.signature-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 8mm;
+  gap: 3mm;
+  width: 100%;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.sign-col {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+  padding: 0 1mm;
+}
+
+.sign-img {
+  height: 8mm;
+  max-width: 85%;
+  object-fit: contain;
+  margin: 0 auto 1mm;
+  display: block;
+}
+
+.sign-label {
+  border-top: 0.75pt solid var(--text-black);
+  padding-top: 1mm;
+  font-size: 7pt;
+  font-weight: 700;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 5mm;
+  margin-top: 8mm;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.action-buttons button {
+  padding: 3mm 8mm;
+  border: 0.75pt solid #0044cc;
+  border-radius: 3mm;
+  background: #0066ff;
+  color: #ffffff;
+  font-size: 9pt;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1.5pt 2.5pt rgba(0, 102, 255, 0.2);
+  transition: all 0.2s ease;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.action-buttons button:hover,
+.action-buttons button:active {
+  background: #0052cc;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ========================================
+   A4 PRINT STYLESHEET (@media print)
+   ======================================== */
+@page {
+  size: A4 portrait;
+  margin: 10mm 12mm;
+}
+
+@media print {
+  html {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 10mm 12mm;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10pt;
+    overflow: hidden !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .portal-container,
+  .loader-wrap,
+  .error-box,
+  .action-buttons,
+  nav,
+  button,
+  select {
+    display: none !important;
+  }
+
+  .result-wrapper {
+    display: flex !important;
+    width: 186mm !important;
+    height: 277mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .marksheet {
+    width: 186mm !important;
+    height: 277mm !important;
+    margin: 0 !important;
+    padding: 10mm 8mm !important;
+    background-color: #ffffff !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .top-header,
+  .top-info-row,
+  .assessment-title,
+  .table-responsive,
+  .final-summary,
+  .verified-note,
+  .signature-area {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  tbody tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .student-table,
+  .grading-table,
+  .result-table,
+  .final-summary table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* LANDSCAPE PRINT SUPPORT */
+@media print and (orientation: landscape) {
+  @page {
+    size: A4 landscape;
+    margin: 8mm 10mm;
+  }
+
+  html {
+    width: 297mm;
+    height: 210mm;
+  }
+
+  body {
+    width: 297mm;
+    height: 210mm;
+    padding: 8mm 10mm;
+  }
+
+  .result-wrapper,
+  .marksheet {
+    width: 277mm !important;
+    height: 194mm !important;
+  }
+}
